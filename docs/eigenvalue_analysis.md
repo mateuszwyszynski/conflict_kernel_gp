@@ -27,7 +27,7 @@ $D$ is symmetric with zero diagonal ($D_{ii} = 0$) and non-negative entries.
 The Gaussian kernel at lengthscale $\kappa$ is the entrywise exponential
 
 $$
-K = K(\kappa), \qquad K_{ij} = \exp\!\left(-\frac{D_{ij}}{2\kappa^2}\right).
+K = K(\kappa), \qquad K_{ij} = \exp\left(-\frac{D_{ij}}{2\kappa^2}\right).
 $$
 
 This is applied element by element; it is not the matrix exponential $e^{-D/2\kappa^2}$.
