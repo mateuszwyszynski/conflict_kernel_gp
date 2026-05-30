@@ -26,9 +26,9 @@ def geodesic_arc(u, v):
         angle = 2*np.pi - angle # Be sure to have the shortest path
     return angle
 
-def gaussian_gram(Dsq, kappa):
-    """Gaussian Gram from squared-distance matrix."""
-    return np.exp(-Dsq / (2 * kappa**2))
+def gaussian_gram(D, kappa):
+    """Gaussian Gram from squared geodesic-distance matrix D."""
+    return np.exp(-D / (2 * kappa**2))
 
 def build_squared_distance_matrix(points_xyz, dist_fn):
     n = len(points_xyz)
@@ -77,14 +77,14 @@ def create_eigenvalue_plot_with_samples():
     for sample_idx, points in enumerate(all_samples):
         print(f"Processing sample {sample_idx + 1}/{n_samples}")
         
-        # Build geodesic squared distance matrix for this sample
-        D_geo_sq = build_squared_distance_matrix(points, geodesic_arc)
-        
+        # Build squared geodesic-distance matrix D for this sample
+        D = build_squared_distance_matrix(points, geodesic_arc)
+
         # Store minimum eigenvalues for this sample
         min_eigenvals = []
-        
+
         for lam in lambda_values:
-            K = gaussian_gram(D_geo_sq, lam)
+            K = gaussian_gram(D, lam)
             eigenvals = np.linalg.eigvalsh(K)
             min_eigenval = eigenvals.min()
             min_eigenvals.append(min_eigenval)
